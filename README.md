@@ -36,6 +36,12 @@ Some developers prefer to use dual-fisheye images.
 For example, people involved with object 
 recognition and external sensor alignment use dual-fisheye images.
 
+## Repository Organization
+
+    /apk/app-debug.apk - binary to install in the RICOH THETA V
+    /tools/stitcher/MiSphereConverter_for_THETAV.apk - mobile stitching application for your Android phone
+    /app/src/main/java/com/theta360/pluginapplication/MainActivity.java - main plug-in source code
+
 ## Screenshots
 
 Dual-fisheye Image

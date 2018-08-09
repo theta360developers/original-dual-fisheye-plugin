@@ -34,7 +34,6 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
     private Context mcontext;
     private int bcnt = 0; //bracketing count
     private int exposureCompensationValue = -6;
-    private int numberOfImages = 7;
     private boolean m_is_bracket = false;
 
     /** Called when the activity is first created. */
@@ -164,7 +163,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
             params.set("RIC_MANUAL_EXPOSURE_ISO_FRONT", 1);
             params.set("RIC_MANUAL_EXPOSURE_ISO_BACK", 1);
             //shutter speed based bracket (+-2EV)
-            bcnt = numberOfImages;
+            bcnt = 3;
             bcnt = bcnt -1;
         }
         //iso = auto & 1 shot
@@ -200,12 +199,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
         if(bcnt > 0) {
             params = mCamera.getParameters();
             params.set("RIC_SHOOTING_MODE", "RicStillCaptureStd");
-            if (numberOfImages == 7) {
-                params.setExposureCompensation(exposureCompensationValue);
-                exposureCompensationValue = exposureCompensationValue + 2;
-            } else {
-                params.setExposureCompensation(3 * ((bcnt - 2)));
-            }
+            params.setExposureCompensation(3 * ((bcnt - 2)));
 
             bcnt = bcnt - 1;
             mCamera.setParameters(params);
