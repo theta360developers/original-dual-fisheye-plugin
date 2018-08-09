@@ -33,7 +33,6 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
     private Camera mCamera = null;
     private Context mcontext;
     private int bcnt = 0; //bracketing count
-    private int exposureCompensationValue = -6;
     private boolean m_is_bracket = false;
 
     /** Called when the activity is first created. */
