@@ -33,6 +33,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
     private Camera mCamera = null;
     private Context mcontext;
     private int bcnt = 0; //bracketing count
+    private int exposureCompensationValue = -6;  // can be -6 to +6
     private boolean m_is_bracket = false;
 
     /** Called when the activity is first created. */
@@ -158,10 +159,18 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
 
         //iso = 64 fix & 3 shots (+-2EV step)
         if(is_bracket) {
-            params.set("RIC_EXPOSURE_MODE", "RicAutoExposureS");
+            // RIC_EXPOSURE_MODE can't be set to RicAutoExposureS
+            // for exposure compensation adjustment to take effect
+            // https://api.ricoh/docs/theta-plugin-reference/camera-api/
+            // Sv or Sensitivity value appears to be specific to Ricoh/Pentax cameras
+            // Tv appears to indicate shutter priority
+            params.set("RIC_EXPOSURE_MODE", "RicAutoExposureP");
             params.set("RIC_MANUAL_EXPOSURE_ISO_FRONT", 1);
             params.set("RIC_MANUAL_EXPOSURE_ISO_BACK", 1);
             //shutter speed based bracket (+-2EV)
+            // set initial exposure compensation to -6;
+            params.setExposureCompensation(exposureCompensationValue);
+
             bcnt = 3;
             bcnt = bcnt -1;
         }
@@ -170,6 +179,8 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
             params.set("RIC_EXPOSURE_MODE", "RicAutoExposureP");
             params.set("RIC_MANUAL_EXPOSURE_ISO_FRONT", -1);
             params.set("RIC_MANUAL_EXPOSURE_ISO_BACK", -1);
+            exposureCompensationValue = 0;
+            params.setExposureCompensation(exposureCompensationValue);
             bcnt = 0;
         }
 
@@ -198,7 +209,10 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
         if(bcnt > 0) {
             params = mCamera.getParameters();
             params.set("RIC_SHOOTING_MODE", "RicStillCaptureStd");
-            params.setExposureCompensation(3 * ((bcnt - 2)));
+            // I don't think the line below works
+            // params.setExposureCompensation(3 * ((bcnt - 2)));
+            exposureCompensationValue = exposureCompensationValue + 6;
+            params.setExposureCompensation(exposureCompensationValue);
 
             bcnt = bcnt - 1;
             mCamera.setParameters(params);
@@ -207,6 +221,8 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
             mCamera.takePicture(null, null, null, pictureListener);
         }
         else{
+            // reset exposureCompensationValue
+            exposureCompensationValue = -6;
             Intent intent = new Intent("com.theta360.plugin.ACTION_AUDIO_SH_CLOSE");
             sendBroadcast(intent);
         }
@@ -223,7 +239,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
                 FileOutputStream fos = null;
                 try {
                     String tname = getNowDate();
-                    String opath = Environment.getExternalStorageDirectory().getPath()+ "/DCIM/100RICOH/"+tname+".JPG";
+                    String opath = Environment.getExternalStorageDirectory().getPath()+ "/DCIM/100RICOH/" + "FISHEYE" +tname+".JPG";
                     Log.d("save", opath);
                     fos = new FileOutputStream(opath);
                     fos.write(data);
