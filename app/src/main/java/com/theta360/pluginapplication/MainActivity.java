@@ -1,3 +1,8 @@
+/**
+ * Based on Ichi Hirota's dual-fisheye plug-in for the THETA V.
+ * Modified to use Shutter speed instead of exposure compensation
+ */
+
 package com.theta360.pluginapplication;
 
 import android.content.ContentResolver;
@@ -33,7 +38,8 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
     private Camera mCamera = null;
     private Context mcontext;
     private int bcnt = 0; //bracketing count
-    private int exposureCompensationValue = -6;  // can be -6 to +6
+    private int shutterSpeedValue = 0;  // can be 0 to 62
+    private static final int numberOfPictures = 9;
     private boolean m_is_bracket = false;
 
     /** Called when the activity is first created. */
@@ -157,30 +163,33 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
         params.setPictureFormat(ImageFormat.JPEG);
         params.setPictureSize(5792, 2896);
 
-        //iso = 64 fix & 3 shots (+-2EV step)
         if(is_bracket) {
-            // RIC_EXPOSURE_MODE can't be set to RicAutoExposureS
-            // for exposure compensation adjustment to take effect
+
             // https://api.ricoh/docs/theta-plugin-reference/camera-api/
-            // Sv or Sensitivity value appears to be specific to Ricoh/Pentax cameras
-            // Tv appears to indicate shutter priority
-            params.set("RIC_EXPOSURE_MODE", "RicAutoExposureP");
+            // Tv indicates shutter priority and must be set to achieve 1/25000
+            // exposure mode must be set to RicAutoExposureT for control of shutter to
+            // 1/25000
+            params.set("RIC_EXPOSURE_MODE", "RicAutoExposureT");
             params.set("RIC_MANUAL_EXPOSURE_ISO_FRONT", 1);
             params.set("RIC_MANUAL_EXPOSURE_ISO_BACK", 1);
-            //shutter speed based bracket (+-2EV)
-            // set initial exposure compensation to -6;
-            params.setExposureCompensation(exposureCompensationValue);
+            // 0 is 1/25000
+            params.set("RIC_MANUAL_EXPOSURE_TIME_FRONT", 0);
+            params.set("RIC_MANUAL_EXPOSURE_TIME_REAR", 0);
 
-            bcnt = 3;
+            bcnt = numberOfPictures;
             bcnt = bcnt -1;
         }
         //iso = auto & 1 shot
+        // for single shot, shutter speed is set to auto
         else{
             params.set("RIC_EXPOSURE_MODE", "RicAutoExposureP");
             params.set("RIC_MANUAL_EXPOSURE_ISO_FRONT", -1);
             params.set("RIC_MANUAL_EXPOSURE_ISO_BACK", -1);
-            exposureCompensationValue = 0;
-            params.setExposureCompensation(exposureCompensationValue);
+            // -1 is auto
+            shutterSpeedValue = -1;
+            params.set("RIC_MANUAL_EXPOSURE_TIME_FRONT", shutterSpeedValue);
+            params.set("RIC_MANUAL_EXPOSURE_TIME_REAR", shutterSpeedValue);
+
             bcnt = 0;
         }
 
@@ -209,10 +218,12 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
         if(bcnt > 0) {
             params = mCamera.getParameters();
             params.set("RIC_SHOOTING_MODE", "RicStillCaptureStd");
-            // I don't think the line below works
-            // params.setExposureCompensation(3 * ((bcnt - 2)));
-            exposureCompensationValue = exposureCompensationValue + 6;
-            params.setExposureCompensation(exposureCompensationValue);
+            shutterSpeedValue = shutterSpeedValue + 7;
+            if(shutterSpeedValue > 62){
+                shutterSpeedValue = 62;  // maximum value is 62
+            }
+            params.set("RIC_MANUAL_EXPOSURE_TIME_FRONT", shutterSpeedValue);
+            params.set("RIC_MANUAL_EXPOSURE_TIME_REAR", shutterSpeedValue);
 
             bcnt = bcnt - 1;
             mCamera.setParameters(params);
@@ -221,8 +232,8 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
             mCamera.takePicture(null, null, null, pictureListener);
         }
         else{
-            // reset exposureCompensationValue
-            exposureCompensationValue = -6;
+            // reset shutterSpeedValue
+            shutterSpeedValue = 0;
             Intent intent = new Intent("com.theta360.plugin.ACTION_AUDIO_SH_CLOSE");
             sendBroadcast(intent);
         }
