@@ -38,9 +38,18 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
     private Camera mCamera = null;
     private Context mcontext;
     private int bcnt = 0; //bracketing count
-    private int shutterSpeedValue = 0;  // can be 0 to 62
-    private static final int numberOfPictures = 9;
-    private boolean m_is_bracket = false;
+    private int shutterSpeedValue = 0;  // can be 0 to 62. 0 is 1/25000
+    // setting numberOfPictures to 9 and shutterSpeedSpace to 8 seems to work out
+    // well
+//    private static final int numberOfPictures = 9;
+//    private static final int shutterSpeedSpacing = 8;
+
+    // using 11 picture and 6 spacing
+    private static final int numberOfPictures = 12;
+    private static final int shutterSpeedSpacing = 6;
+
+    // true will start with bracket
+    private boolean m_is_bracket = true;
 
     /** Called when the activity is first created. */
     @Override
@@ -85,7 +94,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
 
             @Override
             public void onKeyLongPress(int keyCode, KeyEvent event) {
-                notificationError("");
+                notificationError("theta debug: " + Integer.toString(keyCode) + " was pressed too long");
             }
         });
 
@@ -185,6 +194,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
             params.set("RIC_EXPOSURE_MODE", "RicAutoExposureP");
             params.set("RIC_MANUAL_EXPOSURE_ISO_FRONT", -1);
             params.set("RIC_MANUAL_EXPOSURE_ISO_BACK", -1);
+            // for single shot mode, we'll use auto shutter speed
             // -1 is auto
             shutterSpeedValue = -1;
             params.set("RIC_MANUAL_EXPOSURE_TIME_FRONT", shutterSpeedValue);
@@ -218,7 +228,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
         if(bcnt > 0) {
             params = mCamera.getParameters();
             params.set("RIC_SHOOTING_MODE", "RicStillCaptureStd");
-            shutterSpeedValue = shutterSpeedValue + 7;
+            shutterSpeedValue = shutterSpeedValue + shutterSpeedSpacing;
             if(shutterSpeedValue > 62){
                 shutterSpeedValue = 62;  // maximum value is 62
             }
