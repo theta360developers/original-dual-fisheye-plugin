@@ -1,12 +1,12 @@
-# 7 Image Bracket Dual-Fisheye Modification
+# 5 Image Bracket "juantonto" Dual-Fisheye 
 
 Please see the master branch for more information.
 
-![7 image fisheye](doc/img/7-image-fisheye.jpg)
+This is an experiment to customize a plug-in for the workflow of an active 360 photographer, juantonto.
 
 ## Features and Usage Information
 
-- 7 image dual-fisheye taken within 7 seconds
+- 5 image dual-fisheye taken within 5 seconds
 - Each image takes approximately 1 second
 - single image dual-fisheye in less than 1 second
 - HDR blending is handled by a free third-party application called Picturenaut (see documentation for instructions)
@@ -14,37 +14,23 @@ Please see the master branch for more information.
 
 ## Post Processing
 
-You need additional software to stitch the images to equirectangular.
+juantonto is using PTGui.
 
-![7 image fisheye](doc/img/7-image-stitch.jpg)
+![stitch line](doc/img/juantonto-ptgui.jpg)
 
+![juantonto patch](doc/img/juantonto-patch.jpg)
 
-## Alternate Versions
-
-As the repository was prepared for a development workshop, there are examples to
-extend the code for different purposes.
-
-### 3 Image original
-
-The original version in the master branch takes 3 images.
-
-### Shutter Speed Modification
-
-The [shutter-speed branch](https://github.com/codetricity/original-dual-fisheye-plugin/tree/shutter-speed) 
- of this repository has the following changes:
-
-- expanded exposure range from 1/25000 to 60 second exposure time
-- 12 image and 9 image bracket shooting 
-- plug-in starts in bracket shooting mode by default instead of single-shot mode
-- exposure is controlled by shutter speed instead of exposure compensation 
 
 ## Usage Notes
 
-The plug-in is called *Plugin Application*
+The plug-in is called *Juantonto Fisheye*
 
 You must set permissions. Documentation includes information on using Vysor.
 
 ![set permissions](doc/img/set-permissions.jpg)
+
+![camera storage permissions](doc/img/camera-storage.jpg)
+
 
 In single image mode, the Wi-Fi LED will be cyan.
 
