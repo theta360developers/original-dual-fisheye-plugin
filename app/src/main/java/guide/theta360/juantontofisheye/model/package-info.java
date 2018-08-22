@@ -15,6 +15,6 @@
  */
 
 /**
- * Package storing Android HTTP communication program
+ * Package that stores Android model
  */
-package com.theta360.pluginapplication.network;
+package guide.theta360.juantontofisheye.model;

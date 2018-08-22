@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.network;
+package guide.theta360.juantontofisheye.network;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import com.theta360.pluginapplication.model.ImageSize;
+import guide.theta360.juantontofisheye.model.ImageSize;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

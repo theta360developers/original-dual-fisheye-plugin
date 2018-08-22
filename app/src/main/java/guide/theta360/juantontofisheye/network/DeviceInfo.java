@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.network;
+package guide.theta360.juantontofisheye.network;
 
 /**
  * Device information class

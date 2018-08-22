@@ -14,18 +14,7 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.network;
-
 /**
- * HTTP communication download listener class
+ * Package storing Android HTTP communication program
  */
-public interface HttpDownloadListener {
-    /**
-     * Total byte count
-     */
-    void onTotalSize(long totalSize);
-    /**
-     * Received byte count
-     */
-    void onDataReceived(int size);
-}
+package guide.theta360.juantontofisheye.network;

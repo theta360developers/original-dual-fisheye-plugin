@@ -14,15 +14,16 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.model;
+package guide.theta360.juantontofisheye.model;
 
 /**
- * Image size type
+ * Indicates the rotation inertia
  */
-public enum ImageSize {
-    /** 2048x1024 */
-    IMAGE_SIZE_2048x1024,
-
-    /** 5376x2688 */
-    IMAGE_SIZE_5376x2688
+public enum RotateInertia {
+    /** none */
+    INERTIA_0,
+    /** weak */
+    INERTIA_50,
+    /** strong */
+    INERTIA_100,;
 }

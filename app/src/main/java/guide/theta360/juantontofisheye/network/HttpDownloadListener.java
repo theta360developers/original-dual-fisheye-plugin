@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.model;
+package guide.theta360.juantontofisheye.network;
 
 /**
- * Indicates the rotation inertia
+ * HTTP communication download listener class
  */
-public enum RotateInertia {
-    /** none */
-    INERTIA_0,
-    /** weak */
-    INERTIA_50,
-    /** strong */
-    INERTIA_100,;
+public interface HttpDownloadListener {
+    /**
+     * Total byte count
+     */
+    void onTotalSize(long totalSize);
+    /**
+     * Received byte count
+     */
+    void onDataReceived(int size);
 }

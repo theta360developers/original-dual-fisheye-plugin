@@ -1,4 +1,4 @@
-package com.theta360.pluginapplication;
+package guide.theta360.juantontofisheye;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.theta360.pluginapplication.R;
 import com.theta360.pluginlibrary.activity.PluginActivity;
 import com.theta360.pluginlibrary.callback.KeyCallback;
 import com.theta360.pluginlibrary.receiver.KeyReceiver;
@@ -34,7 +35,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
     private Context mcontext;
     private int bcnt = 0; //bracketing count
     private int exposureCompensationValue = -6;  // can be -6 to +6
-    private int numberOfImages = 7;
+    private int numberOfImages = 5;
     private boolean m_is_bracket = false;
 
     /** Called when the activity is first created. */
@@ -211,7 +212,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
         if(bcnt > 0) {
             params = mCamera.getParameters();
             params.set("RIC_SHOOTING_MODE", "RicStillCaptureStd");
-            exposureCompensationValue = exposureCompensationValue + 2;
+            exposureCompensationValue = exposureCompensationValue + 3;
             params.setExposureCompensation(exposureCompensationValue);
 
             bcnt = bcnt - 1;

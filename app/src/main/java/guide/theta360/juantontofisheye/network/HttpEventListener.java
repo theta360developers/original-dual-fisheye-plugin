@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.network;
+package guide.theta360.juantontofisheye.network;
 
 /**
  * HTTP communication event listener class

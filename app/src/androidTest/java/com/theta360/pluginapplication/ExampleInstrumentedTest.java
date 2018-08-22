@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.theta360.pluginapplication", appContext.getPackageName());
+        assertEquals("com.theta360.juantontofisheye", appContext.getPackageName());
     }
 }
