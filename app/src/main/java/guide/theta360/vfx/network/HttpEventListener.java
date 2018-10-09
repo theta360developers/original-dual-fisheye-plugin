@@ -14,18 +14,31 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.network;
+package guide.theta360.vfx.network;
 
 /**
- * HTTP communication download listener class
+ * HTTP communication event listener class
  */
-public interface HttpDownloadListener {
+public interface HttpEventListener {
     /**
-     * Total byte count
+     * Notifies you of the device status check results
+     * @param newStatus true:Update available, false;No update available
      */
-    void onTotalSize(long totalSize);
+    void onCheckStatus(boolean newStatus);
+
     /**
-     * Received byte count
+     * Notifies you when the file is saved
+     * @param latestCapturedFileId ID of saved file
      */
-    void onDataReceived(int size);
+    void onObjectChanged(String latestCapturedFileId);
+
+    /**
+     * Notify on completion of event
+     */
+    void onCompleted();
+
+    /**
+     * Notify in the event of an error
+     */
+    void onError(String errorMessage);
 }

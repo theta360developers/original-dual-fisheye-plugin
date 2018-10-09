@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    buildToolsVersion "28.0.2"
     defaultConfig {
-        applicationId "com.theta360.pluginapplication"
+        applicationId "com.theta360.vfx"
         minSdkVersion 25
         targetSdkVersion 25
         versionCode 2

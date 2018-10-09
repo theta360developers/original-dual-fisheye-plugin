@@ -17,4 +17,4 @@
 /**
  * Package that stores Android model
  */
-package com.theta360.pluginapplication.model;
+package guide.theta360.vfx.model;

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.task;
+package guide.theta360.vfx.task;
 
 import android.os.AsyncTask;
-import com.theta360.pluginapplication.network.HttpConnector;
-import com.theta360.pluginapplication.network.HttpEventListener;
+import guide.theta360.vfx.network.HttpConnector;
+import guide.theta360.vfx.network.HttpEventListener;
 
 public class TakePictureTask extends AsyncTask<Void, Void, HttpConnector.ShootResult> {
     private Callback mCallback;

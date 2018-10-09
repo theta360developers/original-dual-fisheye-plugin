@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-package com.theta360.pluginapplication.network;
+package guide.theta360.vfx.network;
 
 /**
  * Information class of device storage

@@ -17,4 +17,4 @@
 /**
  * Package storing Android HTTP communication program
  */
-package com.theta360.pluginapplication.network;
+package guide.theta360.vfx.network;

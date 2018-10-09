@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.theta360.pluginapplication.model;
+package guide.theta360.vfx.model;
 
 /**
  * Constant used by the program
