@@ -46,7 +46,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
 
     // using 11 picture and 6 spacing
     private static final int numberOfPictures = 12;
-    private static final int shutterSpeedSpacing = 6;
+    private static final int shutterSpeedSpacing = 4;
 
     // true will start with bracket
     private boolean m_is_bracket = true;
@@ -229,8 +229,12 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
             params = mCamera.getParameters();
             params.set("RIC_SHOOTING_MODE", "RicStillCaptureStd");
             shutterSpeedValue = shutterSpeedValue + shutterSpeedSpacing;
-            if(shutterSpeedValue > 62){
-                shutterSpeedValue = 62;  // maximum value is 62
+            /**
+             * a maximum shutter speed of 1 second is 44
+             * 48 corresponds to 2.5 seconds
+             */
+            if(shutterSpeedValue > 48){
+                shutterSpeedValue = 48;  // maximum value is 44
             }
             params.set("RIC_MANUAL_EXPOSURE_TIME_FRONT", shutterSpeedValue);
             params.set("RIC_MANUAL_EXPOSURE_TIME_REAR", shutterSpeedValue);
@@ -260,7 +264,7 @@ public class MainActivity extends PluginActivity implements SurfaceHolder.Callba
                 FileOutputStream fos = null;
                 try {
                     String tname = getNowDate();
-                    String opath = Environment.getExternalStorageDirectory().getPath()+ "/DCIM/100RICOH/" + "FISHEYE" +tname+".JPG";
+                    String opath = Environment.getExternalStorageDirectory().getPath()+ "/DCIM/100RICOH/" + "VFX" +tname+".JPG";
                     Log.d("save", opath);
                     fos = new FileOutputStream(opath);
                     fos.write(data);
