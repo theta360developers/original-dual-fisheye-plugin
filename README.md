@@ -118,3 +118,5 @@ short button presses only. Press and release each button quickly.
 
 Discussion
 https://community.theta360.guide/t/dual-fisheye-images-with-theta-v-plug-in/2692/
+
+![Analytics](https://ga-beacon.appspot.com/UA-73311422-5/dual-fisheye-plugin)
