@@ -1,8 +1,10 @@
 # Dual-Fisheye For THETA V
 
-This is a code for the Dual Fisheye Plug-in by Ichi Hirota for the RICOH THETA V.
+This is a early code for the Dual Fisheye Plug-in by Ichi Hirota for the RICOH THETA V.  This is not the same as the code for Ichi's plug-in that is in the plug-in store.
+
 This repository was created for a technical workshop as part of educational curriculum. 
-This code is not intended for production use.  
+
+__This code is not intended for production use.__  
 
 For more information on
 plug-in development, including use and modification of this plug-in, see the free plug-in developer
