@@ -10,7 +10,7 @@ For more information on
 plug-in development, including use and modification of this plug-in, see the free plug-in developer
 guide, available at http://theta360.guide/plugin/
 
-Ichi Hirota's app should be available in the THETA Plug-in Store shortly.
+An improved version of [Ichi Hirota's app is available in the THETA Plug-in Store](https://pluginstore.theta360.com/plugins/com.hirota41.dualfisheye_plugin/).
 
 ## Features and Usage Information
 
